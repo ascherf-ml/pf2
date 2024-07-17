@@ -31,8 +31,8 @@ with st.form('creation_form'):
     st.sidebar.write(f'Your budget is {budget} XP.')
 
     monsterdata_filtered = monsterdata[monsterdata['Creature Level'].isin(range(party_level - 4, party_level + 4))]
-    #if trait != 'None':
-    #    monsterdata_filtered = monsterdata_filtered[monsterdata_filtered['Trait 1'].isin([trait])]
+    if trait != None:
+        monsterdata_filtered = monsterdata_filtered[monsterdata_filtered['Trait 1'].isin([trait])]
 
     encounter_roles = {'role': ['lackey_low', 'lackey_lowmod', 'lackey', 'standard', 'standard2',
                                 'standard3', 'boss_low', 'boss_lowmod', 'boss_modhard','boss_hardextr', 'boss_extreme'], 
