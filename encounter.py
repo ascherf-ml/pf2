@@ -24,14 +24,15 @@ with st.form('creation_form'):
     party_level = st.sidebar.slider('Select Party Level', 1, 20, 5)
 
     st.sidebar.title('Encounter Budget')
-    budget_name = st.sidebar.selectbox('Select Encounter Budget', encounter_budget['budget_name'], index= 2)
+    budget_name = st.sidebar.selectbox('Select Encounter Difficulty', encounter_budget['budget_name'], index= 2)
     budget = encounter_budget.loc[encounter_budget['budget_name'] == budget_name, 'budget_value'].values[0]
 
-    trait = st.sidebar.selectbox('Select Trait', sorted(monsterdata['Trait 1'].unique()))
+    trait = st.sidebar.selectbox('Select Trait', sorted(monsterdata['Trait 1'].unique()), index=None)
     st.sidebar.write(f'Your budget is {budget} XP.')
 
     monsterdata_filtered = monsterdata[monsterdata['Creature Level'].isin(range(party_level - 4, party_level + 4))]
-    monsterdata_filtered = monsterdata_filtered[monsterdata_filtered['Trait 1'].isin([trait])]
+    if trait != 'None':
+        monsterdata_filtered = monsterdata_filtered[monsterdata_filtered['Trait 1'].isin([trait])]
 
     encounter_roles = {'role': ['lackey_low', 'lackey_lowmod', 'lackey', 'standard', 'standard2',
                                 'standard3', 'boss_low', 'boss_lowmod', 'boss_modhard','boss_hardextr', 'boss_extreme'], 
